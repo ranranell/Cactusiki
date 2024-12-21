@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище VSModelContainer" CdmEntityContainer="Entities5">
+    <EntitySetMapping Name="Cactus">
+      <EntityTypeMapping TypeName="VSModel.Cactus">
+        <MappingFragment StoreEntitySet="Cactus">
+          <ScalarProperty Name="id_Cactus" ColumnName="id_Cactus" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="View_id" ColumnName="View_id" />
+          <ScalarProperty Name="Origin" ColumnName="Origin" />
+          <ScalarProperty Name="Age" ColumnName="Age" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="City">
+      <EntityTypeMapping TypeName="VSModel.City">
+        <MappingFragment StoreEntitySet="City">
+          <ScalarProperty Name="id_City" ColumnName="id_City" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Contracts">
+      <EntityTypeMapping TypeName="VSModel.Contracts">
+        <MappingFragment StoreEntitySet="Contracts">
+          <ScalarProperty Name="number_Contract" ColumnName="number_Contract" />
+          <ScalarProperty Name="Exhibition_id" ColumnName="Exhibition_id" />
+          <ScalarProperty Name="Cactus_id" ColumnName="Cactus_id" />
+          <ScalarProperty Name="Reward" ColumnName="Reward" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Exhibitions">
+      <EntityTypeMapping TypeName="VSModel.Exhibitions">
+        <MappingFragment StoreEntitySet="Exhibitions">
+          <ScalarProperty Name="id_Exhibition" ColumnName="id_Exhibition" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Date_Start" ColumnName="Date_Start" />
+          <ScalarProperty Name="Date_End" ColumnName="Date_End" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Login">
+      <EntityTypeMapping TypeName="VSModel.Login">
+        <MappingFragment StoreEntitySet="Login">
+          <ScalarProperty Name="id_Login" ColumnName="id_Login" />
+          <ScalarProperty Name="Role_id" ColumnName="Role_id" />
+          <ScalarProperty Name="Login1" ColumnName="Login" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="VSModel.Roles">
+        <MappingFragment StoreEntitySet="Roles">
+          <ScalarProperty Name="id_Role" ColumnName="id_Role" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Street">
+      <EntityTypeMapping TypeName="VSModel.Street">
+        <MappingFragment StoreEntitySet="Street">
+          <ScalarProperty Name="kod_Street" ColumnName="kod_Street" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="City_id" ColumnName="City_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Views">
+      <EntityTypeMapping TypeName="VSModel.Views">
+        <MappingFragment StoreEntitySet="Views">
+          <ScalarProperty Name="id_View" ColumnName="id_View" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Insturction" ColumnName="Insturction" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

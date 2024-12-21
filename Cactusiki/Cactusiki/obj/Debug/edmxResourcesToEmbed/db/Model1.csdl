@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="VSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Cactus">
+    <Key>
+      <PropertyRef Name="id_Cactus" />
+    </Key>
+    <Property Name="id_Cactus" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="View_id" Type="Int32" />
+    <Property Name="Origin" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Age" Type="Int32" />
+    <Property Name="Price" Type="Int32" />
+    <NavigationProperty Name="Views" Relationship="Self.FK_Cactus_Views" FromRole="Cactus" ToRole="Views" />
+    <NavigationProperty Name="Contracts" Relationship="Self.FK_Contracts_Cactus" FromRole="Cactus" ToRole="Contracts" />
+  </EntityType>
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="id_City" />
+    </Key>
+    <Property Name="id_City" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Street" Relationship="Self.FK_Street_City" FromRole="City" ToRole="Street" />
+  </EntityType>
+  <EntityType Name="Contracts">
+    <Key>
+      <PropertyRef Name="number_Contract" />
+    </Key>
+    <Property Name="number_Contract" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Exhibition_id" Type="Int32" />
+    <Property Name="Cactus_id" Type="Int32" />
+    <Property Name="Reward" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Comments" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Cactus" Relationship="Self.FK_Contracts_Cactus" FromRole="Contracts" ToRole="Cactus" />
+    <NavigationProperty Name="Exhibitions" Relationship="Self.FK_Contracts_Exhibitions" FromRole="Contracts" ToRole="Exhibitions" />
+  </EntityType>
+  <EntityType Name="Exhibitions">
+    <Key>
+      <PropertyRef Name="id_Exhibition" />
+    </Key>
+    <Property Name="id_Exhibition" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Date_Start" Type="DateTime" Precision="0" />
+    <Property Name="Date_End" Type="DateTime" Precision="0" />
+    <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Contracts" Relationship="Self.FK_Contracts_Exhibitions" FromRole="Exhibitions" ToRole="Contracts" />
+  </EntityType>
+  <EntityType Name="Login">
+    <Key>
+      <PropertyRef Name="id_Login" />
+    </Key>
+    <Property Name="id_Login" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Role_id" Type="Int32" />
+    <Property Name="Login1" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Roles" Relationship="Self.FK_Login_Roles" FromRole="Login" ToRole="Roles" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="id_Role" />
+    </Key>
+    <Property Name="id_Role" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Login" Relationship="Self.FK_Login_Roles" FromRole="Roles" ToRole="Login" />
+  </EntityType>
+  <EntityType Name="Street">
+    <Key>
+      <PropertyRef Name="kod_Street" />
+    </Key>
+    <Property Name="kod_Street" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="City_id" Type="Int32" />
+    <NavigationProperty Name="City" Relationship="Self.FK_Street_City" FromRole="Street" ToRole="City" />
+  </EntityType>
+  <EntityType Name="Views">
+    <Key>
+      <PropertyRef Name="id_View" />
+    </Key>
+    <Property Name="id_View" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Insturction" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Cactus" Relationship="Self.FK_Cactus_Views" FromRole="Views" ToRole="Cactus" />
+  </EntityType>
+  <Association Name="FK_Cactus_Views">
+    <End Role="Views" Type="Self.Views" Multiplicity="0..1" />
+    <End Role="Cactus" Type="Self.Cactus" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Views">
+        <PropertyRef Name="id_View" />
+      </Principal>
+      <Dependent Role="Cactus">
+        <PropertyRef Name="View_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Contracts_Cactus">
+    <End Role="Cactus" Type="Self.Cactus" Multiplicity="0..1" />
+    <End Role="Contracts" Type="Self.Contracts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cactus">
+        <PropertyRef Name="id_Cactus" />
+      </Principal>
+      <Dependent Role="Contracts">
+        <PropertyRef Name="Cactus_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Street_City">
+    <End Role="City" Type="Self.City" Multiplicity="0..1" />
+    <End Role="Street" Type="Self.Street" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="id_City" />
+      </Principal>
+      <Dependent Role="Street">
+        <PropertyRef Name="City_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Contracts_Exhibitions">
+    <End Role="Exhibitions" Type="Self.Exhibitions" Multiplicity="0..1" />
+    <End Role="Contracts" Type="Self.Contracts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Exhibitions">
+        <PropertyRef Name="id_Exhibition" />
+      </Principal>
+      <Dependent Role="Contracts">
+        <PropertyRef Name="Exhibition_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Login_Roles">
+    <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+    <End Role="Login" Type="Self.Login" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="id_Role" />
+      </Principal>
+      <Dependent Role="Login">
+        <PropertyRef Name="Role_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Entities5" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Cactus" EntityType="Self.Cactus" />
+    <EntitySet Name="City" EntityType="Self.City" />
+    <EntitySet Name="Contracts" EntityType="Self.Contracts" />
+    <EntitySet Name="Exhibitions" EntityType="Self.Exhibitions" />
+    <EntitySet Name="Login" EntityType="Self.Login" />
+    <EntitySet Name="Roles" EntityType="Self.Roles" />
+    <EntitySet Name="Street" EntityType="Self.Street" />
+    <EntitySet Name="Views" EntityType="Self.Views" />
+    <AssociationSet Name="FK_Cactus_Views" Association="Self.FK_Cactus_Views">
+      <End Role="Views" EntitySet="Views" />
+      <End Role="Cactus" EntitySet="Cactus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Contracts_Cactus" Association="Self.FK_Contracts_Cactus">
+      <End Role="Cactus" EntitySet="Cactus" />
+      <End Role="Contracts" EntitySet="Contracts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Street_City" Association="Self.FK_Street_City">
+      <End Role="City" EntitySet="City" />
+      <End Role="Street" EntitySet="Street" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Contracts_Exhibitions" Association="Self.FK_Contracts_Exhibitions">
+      <End Role="Exhibitions" EntitySet="Exhibitions" />
+      <End Role="Contracts" EntitySet="Contracts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Login_Roles" Association="Self.FK_Login_Roles">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="Login" EntitySet="Login" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
